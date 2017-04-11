@@ -1,6 +1,6 @@
 /*
 UFFS Milton Junior Viot 2017 ED1
-Busca em Matriz
+Busca em matriz
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,16 +24,16 @@ int main(){
     scanf("%d", &m);
     p = &m;
 
-    if((p = searchMatrix(matriz, p)) != NULL)
+    /*if((p = searchMatrix(matriz, p)) != NULL)
         printf("\nEndereço do valor %d na matriz: %p",*p, p);
     else
-        printf("\nValor %d não encontrado na matriz.",m);
+        printf("\nValor %d não encontrado na matriz.",m);*/
 
     searchMatrix1(matriz, &m, &p);
     if(p != NULL)
-        printf("\nEndereço do valor %d na matriz: %p",*p, p);
+        printf("\nEndereço do valor %d na matriz: %p\n",*p, p);
     else
-        printf("\nNULL.",m);
+        printf("\nNULL.");
 
     return 0;
 }
@@ -54,6 +54,16 @@ int * alocamatriz(int n){
         printf("%d ",matriz[c]);
     printf("\n");
 
+
+        for(l = 0; l <= n; l++)
+            matriz[l] = rand()%1000;
+
+
+
+        for(l = 0; l <= n; l++)
+            printf("%d ",matriz[l]);
+        printf("\n");
+
     return matriz;
 }
 
@@ -72,12 +82,19 @@ int * searchMatrix(int * matriz, int * number){
 }
 
 void searchMatrix1(int * matriz, int * number, int **p){
-     int *l, c = 0;
+     int l, c = 0;
     while(c <= tam){
         if(matriz[c] == *number){
             *p = &matriz[c];
             break;
         }else
             c++;
+    }
+    while(l <= tam){
+        if(matriz[l] == *number){
+            *p = &matriz[l];
+            break;
+        }else
+            l++;
     }
 }
