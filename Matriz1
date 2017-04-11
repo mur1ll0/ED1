@@ -1,0 +1,71 @@
+//declaração de matriz estática
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int * searchMatrix(int * matriz, int * number);
+void searchMatrix1(int * matriz, int * number, int **p);
+
+int main(){
+    int n, m, *p, *number;
+    printf("Insira o numero de colunas da matriz: ");
+    scanf("%d", &n);
+    
+    int matriz[n];
+    for(m = 0; m < n; m++)
+        matriz[m] = rand()%1000;
+    
+    printf("Conteudo da matriz: \n[");
+    for(m = 0; m < n; m++){
+        if(m == n-1)
+            printf(" %d]",matriz[m]);
+        else
+            printf(" %d,",matriz[m]);
+    }
+    printf("\n");
+    
+    printf("\nInsira um numero a ser buscado na matriz: ");
+    scanf("%d", &m);
+    p = &m;
+    
+    printf("\nsearchMatrix:");
+    if((p = searchMatrix(matriz, p)) != NULL)
+        printf("\nEndereÃ§o do valor %d no matriz: %p\n",*p, p);
+    else
+        printf("\nValor %d nao encontrado no matriz.\n",m);
+    
+    printf("\nsearchMatrix1:");   
+    searchMatrix1(matriz, &m, &p);
+    if(p != NULL)
+        printf("\nEndereÃ§o do valor %d no matriz: %p\n",*p, p);
+    else
+        printf("\nValor %d nao encontrado no matriz.\n",m);
+        
+    return 0;
+}
+
+
+int * searchMatrix(int * matriz, int * number){
+    int *l = number, c = 0;
+    while(c <=  (int)sizeof(matriz)){
+        if(matriz[c] == *number){
+            l = &matriz[c];
+            break;
+        }else
+            c++;
+    }
+    if(matriz[c] != *number)
+        return NULL;
+    return l;
+}
+
+void searchMatrix1(int * matriz, int * number, int **p){
+     int *l, c = 0;
+    while(c <=  (int)sizeof(matriz)){
+        if(matriz[c] == *number){
+            *p = &matriz[c];
+            break;
+        }else
+            c++;
+    }
+}
