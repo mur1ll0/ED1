@@ -18,7 +18,7 @@ int main(){
     printf("Conteudo da matriz: \n[");
     for(m = 0; m < n; m++){
         if(m == n-1)
-            printf(" %d]",matriz[m]);
+            printf(" %d",matriz[m]);
         else
             printf(" %d,",matriz[m]);
     }
@@ -30,14 +30,14 @@ int main(){
     
     printf("\nsearchMatrix:");
     if((p = searchMatrix(matriz, p)) != NULL)
-        printf("\nEndereÃ§o do valor %d no matriz: %p\n",*p, p);
+        printf("\nEndereço do valor %d na matriz: %p\n",*p, p);
     else
         printf("\nValor %d nao encontrado no matriz.\n",m);
     
     printf("\nsearchMatrix1:");   
     searchMatrix1(matriz, &m, &p);
     if(p != NULL)
-        printf("\nEndereÃ§o do valor %d no matriz: %p\n",*p, p);
+        printf("\nEndereço do valor %d no matriz: %p\n",*p, p);
     else
         printf("\nValor %d nao encontrado no matriz.\n",m);
         
