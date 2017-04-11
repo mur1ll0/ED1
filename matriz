@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int * searchMatrix(int * matriz, int * number);
+void searchMatrix1(int * matriz, int * number, int **p);
+int * alocamatriz(int n);
+
+int tam;
+
+int main(){
+    int n, m, *p, *number, *matriz;
+    printf("Insira o numero de colunas da matriz: ");
+    scanf("%d", &n);
+    
+    matriz = alocamatriz(n);
+    tam = n;
+    
+    printf("\nInsira um numero a ser buscado na matriz: ");
+    scanf("%d", &m);
+    p = &m;
+    
+    if((p = searchMatrix(matriz, p)) != NULL)
+        printf("\nEndereÃ§o do valor %d no matriz: %p",*p, p);
+    else
+        printf("\nValor %d nao encontrado no matriz.",m);
+       
+    searchMatrix1(matriz, &m, &p);
+    if(p != NULL)
+        printf("\nEndereÃ§o do valor %d no matriz: %p",*p, p);
+    else
+        printf("\nValor %d nao encontrado no matriz.",m);
+        
+    return 0;
+}
+
+
+int * alocamatriz(int n){
+    n = n - 1;
+    int * matriz = (int *)malloc(n*sizeof(int));
+    int l,c;
+    srand( (unsigned)time(NULL) );
+
+    for(c = 0; c <= n; c++)
+        matriz[c] = rand()%1000;
+    
+    
+    
+    for(c = 0; c <= n; c++)
+        printf("%d ",matriz[c]);
+    printf("\n");
+    
+    return matriz;
+}
+
+int * searchMatrix(int * matriz, int * number){
+    int *l = number, c = 0;
+    while(c <= tam){
+        if(matriz[c] == *number){
+            l = &matriz[c];
+            break;
+        }else
+            c++;
+    }
+    if(matriz[c] != *number)
+        return NULL;
+    return l;
+}
+
+void searchMatrix1(int * matriz, int * number, int **p){
+     int *l, c = 0;
+    while(c <= tam){
+        if(matriz[c] == *number){
+            *p = &matriz[c];
+            break;
+        }else
+            c++;
+    }
+}
