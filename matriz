@@ -1,3 +1,7 @@
+/*
+UFFS Milton Junior Viot 2017 ED1
+Busca em Matriz
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -12,25 +16,25 @@ int main(){
     int n, m, *p, *number, *matriz;
     printf("Insira o numero de colunas da matriz: ");
     scanf("%d", &n);
-    
+
     matriz = alocamatriz(n);
     tam = n;
-    
+
     printf("\nInsira um numero a ser buscado na matriz: ");
     scanf("%d", &m);
     p = &m;
-    
+
     if((p = searchMatrix(matriz, p)) != NULL)
-        printf("\nEndereÃ§o do valor %d no matriz: %p",*p, p);
+        printf("\nEndereço do valor %d na matriz: %p",*p, p);
     else
-        printf("\nValor %d nao encontrado no matriz.",m);
-       
+        printf("\nValor %d não encontrado na matriz.",m);
+
     searchMatrix1(matriz, &m, &p);
     if(p != NULL)
-        printf("\nEndereÃ§o do valor %d no matriz: %p",*p, p);
+        printf("\nEndereço do valor %d na matriz: %p",*p, p);
     else
-        printf("\nValor %d nao encontrado no matriz.",m);
-        
+        printf("\nNULL.",m);
+
     return 0;
 }
 
@@ -43,13 +47,13 @@ int * alocamatriz(int n){
 
     for(c = 0; c <= n; c++)
         matriz[c] = rand()%1000;
-    
-    
-    
+
+
+
     for(c = 0; c <= n; c++)
         printf("%d ",matriz[c]);
     printf("\n");
-    
+
     return matriz;
 }
 
