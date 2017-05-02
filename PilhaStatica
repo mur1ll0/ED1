@@ -3,6 +3,31 @@
 #include <stdlib.h>
 
 int main () {
+  
+  int EntradaUs=9;
+  
+    while(EntradaUs > 0){
+    
+      puts("-----------------------------------");
+      puts("{1} Para inserir na Pilha");
+      puts("-----------------------------------");
+      
+      
+      puts("-----------------------------------");
+      puts("{2} Para excluir da Pilha");
+      puts("-----------------------------------");
+      
+      
+      puts("-----------------------------------");
+      puts("{3} Para inserir na Pilha");
+      puts("-----------------------------------");
+      
+      
+      puts("-----------------------------------");
+      puts("{0} Para finaluzar o programa");
+      puts("-----------------------------------");
+      
+      scanf("%d",&EntradaUs);
 
 return 0;
 }
