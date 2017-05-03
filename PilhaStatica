@@ -1,33 +1,91 @@
-
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 100
+
+//#include <teste.h>
+/* Pilha estática*/
+
+struct aluno {
+  int matricula;
+  char nome[30];
+  float n1,n2,n3;
+};
+
+typedef struct pilha Pilha ;
+
+
+
+struct pilha{
+  int qtd; // Posição e quantidade tamanho da pilha
+  struct aluno dados[MAX]; // è a Pilha
+    /* data */
+  };
+
+
 
 int main () {
-  
-  int EntradaUs=9;
-  
-    while(EntradaUs > 0){
-    
-      puts("-----------------------------------");
-      puts("{1} Para inserir na Pilha");
-      puts("-----------------------------------");
-      
-      
-      puts("-----------------------------------");
-      puts("{2} Para excluir da Pilha");
-      puts("-----------------------------------");
-      
-      
-      puts("-----------------------------------");
-      puts("{3} Para inserir na Pilha");
-      puts("-----------------------------------");
-      
-      
-      puts("-----------------------------------");
-      puts("{0} Para finaluzar o programa");
-      puts("-----------------------------------");
-      
-      scanf("%d",&EntradaUs);
 
-return 0;
+Pilha *pi;
+
+
+
+int EntradaUs=9;
+
+  while(EntradaUs > 0){
+
+    puts("-----------------------------------");
+    puts("{1} Para inserir na Pilha");//Push
+    puts("-----------------------------------");
+
+
+    puts("-----------------------------------");
+    puts("{2} Para excluir da Pilha");//Pop
+    puts("-----------------------------------");
+
+
+    puts("-----------------------------------");
+    puts("{3} Para inserir na Pilha");
+    puts("-----------------------------------");
+
+
+    puts("-----------------------------------");
+    puts("{0} Para finaluzar o programa");
+    puts("-----------------------------------");
+
+    scanf("%d",&EntradaUs);
+
+    switch (EntradaUs) {
+
+      case 1:
+
+        puts("caso 1");
+        pi = cria_Pilha();
+
+          Pilha *pi;
+          pi=(Pilha*) malloc(sizeof(struct pilha));
+          if(pi != NULL)
+            pi-> qtd = 0;
+          return pi;
+
+      break;
+      case 2:
+        puts("caso 2");
+      break;
+      case 3:
+        puts("caso 3");
+      break;
+      case 0:
+        puts("caso O Finalizado");
+      break;
+
+    }
+    libera_Pilha(pi);
+  }
+  void libera_Pilha (Pilha * pi){
+    free (pi);
+    void libera_Pilha (Pilha * pi);
+  }
+
+  return 0;
+
 }
