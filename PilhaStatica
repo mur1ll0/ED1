@@ -1,91 +1,129 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX 100
-
-//#include <teste.h>
-/* Pilha estática*/
-
-struct aluno {
-  int matricula;
-  char nome[30];
-  float n1,n2,n3;
-};
-
-typedef struct pilha Pilha ;
+#include <string.h>
+#include <stdio_ext.h>
+#define TAM 50
 
 
+typedef struct _produto{
+  int cod;
+  char nome[TAM];
+  float preco;
+} tp_produto;
 
-struct pilha{
-  int qtd; // Posição e quantidade tamanho da pilha
-  struct aluno dados[MAX]; // è a Pilha
-    /* data */
-  };
+typedef struct _pilha{//criação de uma struct tipo pilha
+  tp_produto *info;
+  int topo;
+}tp_pilha;
 
+// prototipos das funções;
+tp_produto * pop(tp_pilha * pilha);
+void push(tp_pilha * ponteiro_pilha);
+void imprime(tp_pilha * pilha);
 
+tp_pilha * inicializar(int tamanho);
 
-int main () {
+int main (void) {
+  int entradaUS=9;
+  int size_stack;
+  puts("size");
+  scanf("%d",&size_stack);
+  tp_pilha * pilha = NULL;
+  pilha = inicializar(size_stack-1);
+  while(entradaUS > 0){
 
-Pilha *pi;
-
-
-
-int EntradaUs=9;
-
-  while(EntradaUs > 0){
-
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
     puts("{1} Para inserir na Pilha");//Push
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
 
 
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
     puts("{2} Para excluir da Pilha");//Pop
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
 
 
-    puts("-----------------------------------");
-    puts("{3} Para inserir na Pilha");
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
+    puts("{3} Para listar todos os campos dos elementos da pilha");
+    puts("------------------------------------------------------");
 
 
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
     puts("{0} Para finaluzar o programa");
-    puts("-----------------------------------");
+    puts("------------------------------------------------------");
 
-    scanf("%d",&EntradaUs);
+    scanf("%d",&entradaUS);
 
-    switch (EntradaUs) {
+    switch (entradaUS) {
 
       case 1:
-
-        puts("caso 1");
-        pi = cria_Pilha();
-
-          Pilha *pi;
-          pi=(Pilha*) malloc(sizeof(struct pilha));
-          if(pi != NULL)
-            pi-> qtd = 0;
-          return pi;
-
+        //puts("{1} Para inserir na Pilha");//Push
+        if(pilha->topo < size_stack-1){
+          push(pilha);
+        }
+        else printf("Pilha Cheia!\n");
       break;
+
       case 2:
-        puts("caso 2");
+        puts("\n");//Pop
+        tp_produto * novo = NULL;
+        novo = pop(pilha);
+        if(novo){
+          printf("cod = %d\n",novo->cod);
+          printf("nome = %s\n",novo->nome);
+          printf("preco = %.2f\n\n",novo->preco);
+        }
+
       break;
+
       case 3:
-        puts("caso 3");
+        puts("{3} Para listar todos os campos dos elementos da pilha");
+       imprime(pilha);
       break;
       case 0:
-        puts("caso O Finalizado");
+        puts("Sair!");
       break;
-
     }
-    libera_Pilha(pi);
   }
-  void libera_Pilha (Pilha * pi){
-    free (pi);
-    void libera_Pilha (Pilha * pi);
+return 0;
+}
+
+void push(tp_pilha * pilha){
+  if(pilha->info==NULL){
+    puts("FUDEU não alocou a pilha essa disgraça!!");
   }
+//  tp_produto * novo = (tp_produto*)malloc(sizof(tp_produto));
+  pilha->topo++;
+  scanf("%d",&pilha->info[pilha->topo].cod);
+  char *nome;
+  scanf("%s",nome);
+  strcpy(pilha->info[pilha->topo].nome, nome);
+  scanf("%f",&pilha->info[pilha->topo].preco);
+}
 
-  return 0;
+tp_pilha * inicializar(int tamanho){ //iniciar ponteiro_pilha
+  tp_pilha *ponteiro_pilha = (tp_pilha*)malloc(sizeof(tp_pilha));    //aloca
+  ponteiro_pilha->topo = -1;    // seta topo
+  ponteiro_pilha->info = (tp_produto*)malloc(sizeof(tp_produto)*tamanho); // seta pilha
+  return ponteiro_pilha;
+}
 
+void imprime(tp_pilha * pilha){
+  int aux = pilha->topo;
+  if(aux != -1)
+    while(aux>=0){
+      printf("------------------------\nElemento : %d\n",aux);
+      printf("cod = %d\n",pilha->info[aux].cod);
+      printf("nome = %s\n",pilha->info[aux].nome);
+      printf("preco = %.2f\n",pilha->info[aux].preco);
+      printf("------------------------\n");
+      aux--;
+    }
+  else
+    printf("Pilha Vazia\n" );
+}
+
+tp_produto * pop(tp_pilha * pilha){
+  if(pilha->topo != -1)
+    return &pilha->info[pilha->topo--];
+  else printf("Pilha Vazia\n" );
 }
