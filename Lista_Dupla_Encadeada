@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio_ext.h>
+
+typedef struct _lista {
+	int info;
+	struct _lista * prox;
+	struct _lista * ant;
+}TpLista;
+
+/* função de inicialização */
+TpLista* inicializa(){
+	return NULL;
+}
+void imprime_lista(TpLista * raiz){
+		printf("Funcao imprime	\n **********************************************\n" );
+		TpLista* aux = (TpLista *) malloc(sizeof(TpLista));
+		aux = raiz;
+		while (aux!= NULL){
+
+			if (aux->ant == NULL) {
+				printf("- NULL <<   ||");
+			}else{
+				printf(" %d <<   ||", aux->ant->info);
+			}
+			printf("| %d |",aux->info );
+			//
+			if (aux->prox == NULL) {
+				printf(">> NULL   \n");
+			}else{
+				printf(" >> %d   \n", aux->prox->info);
+			}
+			aux= aux->prox;
+		}
+}/* fim funcao iprime*/
+
+
+/* função de inserção*/
+TpLista * inserir(TpLista * raiz,int valor){
+	TpLista* novo = (TpLista *) malloc(sizeof(TpLista));
+	novo->info = valor;
+	/* 1° inserção ? */
+	if(raiz == NULL){
+		raiz =novo;
+		printf("Raiz NULL\n" );
+		novo->info = valor;
+		novo->prox = NULL;
+		novo->ant = NULL;
+	}else{
+			/* Não é a 1° aloca aux*/
+
+			TpLista* aux = (TpLista *) malloc(sizeof(TpLista));
+			aux = raiz;
+
+
+			while ( aux != NULL){
+					if (novo->info >= aux->info){
+							/*se novo-> info for maior que o aux, percorre a lista*/
+							aux = aux->prox;
+							if (aux->prox == NULL) {
+								// caso o o fim (aux->prox = NULL) ser o final da lista para o laco
+								break;
+							}
+					}else{
+						/*caso contrario, insere aqui*/
+
+						/*caso inserir no inicio*/
+						if(aux -> ant == NULL){
+							//aux -> ant = novo;
+							novo -> prox = aux;
+							novo -> ant =  NULL;
+
+							raiz = novo;
+							printf("raiz.info %d\n",raiz->info );
+							return novo;
+						}else{
+							/*caso inserir no  fim*/
+							novo->prox = NULL;
+							novo->ant = aux;
+							aux->prox = novo;
+							return raiz;
+						}
+
+
+
+
+
+					/* caso inserir no meio*/
+				}
+			}/*fecha while*/
+
+	}
+
+
+
+	return raiz;
+}/* fim inserir*/
+
+
+int main () {
+	TpLista* raiz = (TpLista *) malloc(sizeof(TpLista));
+	raiz = inicializa();
+
+if (raiz == NULL){
+	printf("Raiz inicializada\n" );
+}else printf("Raiz não inicializada\n" );
+
+
+/*insere dados para teste*/
+	raiz = inserir(raiz,10);
+	raiz = inserir(raiz,5);
+	raiz = inserir(raiz,15);
+	raiz = inserir(raiz,20);
+	imprime_lista(raiz);
+	return 0;
+}
