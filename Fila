@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio_ext.h>
+
+
+typedef struct Node{//criação de uma struct tipo Node
+  int num;
+  struct Node *prox;
+}tp_nodo;
+
+// prototipos das funções;
+tp_nodo * insert(tp_nodo * head);
+tp_nodo * remover(tp_nodo * head);
+void imprime(tp_nodo * head);
+
+int main (void) {
+	tp_nodo * head = NULL;
+
+  int entradaUS=9;
+  while(entradaUS > 0){
+
+    puts("------------------------------------------------------");
+    puts("{1} Para inserir na fila");//Push
+    puts("------------------------------------------------------");
+
+
+    puts("------------------------------------------------------");
+    puts("{2} Para excluir da Fila");//Pop
+    puts("------------------------------------------------------");
+
+
+    puts("------------------------------------------------------");
+    puts("{3} Para listar todos os campos dos elementos da fila");
+    puts("------------------------------------------------------");
+
+
+    puts("------------------------------------------------------");
+    puts("{0} Para finaluzar o programa");
+    puts("------------------------------------------------------");
+
+    scanf("%d",&entradaUS);
+
+    switch (entradaUS) {
+
+      case 1:
+		    head = insert(head);
+		  break;
+
+      case 2:
+		    head = remover(head);
+      break;
+
+      case 3:
+	     imprime(head);
+      break;
+
+      case 0:
+        puts("Sair!");
+      break;
+    }
+  }
+return 0;
+}
+
+
+void imprime(tp_nodo * head){
+  printf("IMPRIMINDO FILA\n");
+	tp_nodo * aux = head;
+	while(aux!=NULL){
+		printf("num = %d\n", aux->num);
+		aux = aux->prox;
+	}
+}
+
+tp_nodo * insert(tp_nodo * head){
+  tp_nodo * aux = head;
+	if(head==NULL){
+		head = (tp_nodo*)malloc(sizeof(tp_nodo));
+    puts("Entrada do valor na FIla");
+		scanf("%d", &head->num);
+		head->prox = NULL;
+	}else{
+		tp_nodo * aux = head;
+		while(aux->prox != NULL) aux = aux->prox; // melhorar para procurar direto no Final (aux) sem percorrer criar ponteiro pro fim e pro inicio
+		tp_nodo * novo = (tp_nodo*)malloc(sizeof(tp_nodo));
+		aux->prox = novo;
+    puts("Entrada do valor na FIla");
+		scanf("%d", &novo->num);
+		novo->prox = NULL;
+	}
+  return head;
+}
+
+tp_nodo * remover(tp_nodo * head){ // só vou excluir o head
+  int a;
+  printf("Qual valor deseja remover: ");
+  scanf("%d", &a);
+
+  tp_nodo * aux = head;
+	if(head==NULL){
+		printf("Fila vazia");
+	}else{
+		tp_nodo * aux = head;
+		tp_nodo * tmp;
+		while(aux->prox != NULL && aux->num!=a) {
+		  tmp = aux;
+		  aux = aux->prox;
+		}
+		if(aux->num == a){
+		   if(aux == head)
+		    head = aux->prox;
+		    else
+		   tmp->prox = aux->prox;
+		}
+	}
+  return head;
+}
