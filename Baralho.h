@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio_ext.h>
+#include <time.h>
+
 
 typedef struct _cartaBaralho{
   int number; //corresponde ao número de cada carta
@@ -12,6 +14,7 @@ typedef struct _cartaBaralho{
   struct _cartaBaralho *right;
   struct _cartaBaralho *left;
 }TpCartaBaralho;
+
 
 /* função de inicialização */
 TpCartaBaralho* inicializa(){
@@ -33,22 +36,49 @@ TpCartaBaralho* inicializa(){
   }
   head = novo; //torna o novo como 1° elemento da lista
   novo->left = NULL;
-  //printf("naipe {%d} numero {%d}\n",novo->naipe,novo->number);
+
   return novo;
 
 }
-void imprime (TpCartaBaralho* head){
- TpCartaBaralho* p = head; // p aponta para o elemento inicial
 
- if (p != NULL){ // lista não está vazia
+TpCartaBaralho* Embaralha(TpCartaBaralho* head,int * naipe,int *number){
+  TpCartaBaralho* novo = head;
+
+
+  int cartas_restantes=40,n=2;
+
+  do {
+     srand(time(NULL));
+     n = rand()%cartas_restantes;
+
+     for(int i=1;i<=n;i++){
+
+       *naipe=novo->naipe;
+       *number=novo->number;
+
+      }
+
+      novo=novo->right;
+      cartas_restantes--;
+  }while(cartas_restantes !=0 && novo != NULL);
+
+return ;
+
+
+
+};
+
+void imprime (TpCartaBaralho* head){
+ TpCartaBaralho* novo = head; // p aponta para o elemento inicial
+ puts("FUNÇÃO IMPRIME");
+  // lista não está vazia
    do {
-     printf("naipe {%d}\n", p->naipe); // imprime info do nó
-     printf("numero {%d}\n", p->number);
-     p = p->right; 	// avança para o próximo nó
-   }while(p != head);
- }else{
-   printf("\nA lista está vazia\n");
- }
+     printf("Naipe {%d} \tNumero {%d}\n",novo->naipe,novo->number);
+     //printf("%d\n",40%100 );
+     novo = novo->right; 	// avança para o próximo nó
+   }while(novo != NULL);
+
 }
+
 #endif
 /**/
