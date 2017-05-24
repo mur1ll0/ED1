@@ -7,6 +7,7 @@
 #include <stdio_ext.h>
 #include <time.h>
 
+int cartas_restantes=40;
 
 typedef struct _cartaBaralho{
   int number; //corresponde ao número de cada carta
@@ -15,70 +16,8 @@ typedef struct _cartaBaralho{
   struct _cartaBaralho *left;
 }TpCartaBaralho;
 
-
-/* função de inicialização */
-TpCartaBaralho* inicializa(){
-	return NULL;
-}
-
-/* função de inserção  a inserção ocorre sempre no inicio*/
- TpCartaBaralho *Inserir(TpCartaBaralho *head,int naipe, int number){
-
-  TpCartaBaralho * novo =(TpCartaBaralho*) malloc(sizeof(TpCartaBaralho));
-
-
-  novo->naipe = naipe;
-  novo->number = number;
-  novo->right = head; // torna head como 2° elemento da lista
-
-  if(head!= NULL){
-    head->left = novo; // insere sempre no inicio da lista tornando o novo sempre o 1° elemento
-  }
-  head = novo; //torna o novo como 1° elemento da lista
-  novo->left = NULL;
-
-  return novo;
-
-}
-
-TpCartaBaralho* Embaralha(TpCartaBaralho* head,int * naipe,int *number){
-  TpCartaBaralho* novo = head;
-
-
-  int cartas_restantes=40,n=2;
-
-  do {
-     srand(time(NULL));
-     n = rand()%cartas_restantes;
-
-     for(int i=1;i<=n;i++){
-
-       *naipe=novo->naipe;
-       *number=novo->number;
-
-      }
-
-      novo=novo->right;
-      cartas_restantes--;
-  }while(cartas_restantes !=0 && novo != NULL);
-
-return ;
-
-
-
-};
-
-void imprime (TpCartaBaralho* head){
- TpCartaBaralho* novo = head; // p aponta para o elemento inicial
- puts("FUNÇÃO IMPRIME");
-  // lista não está vazia
-   do {
-     printf("Naipe {%d} \tNumero {%d}\n",novo->naipe,novo->number);
-     //printf("%d\n",40%100 );
-     novo = novo->right; 	// avança para o próximo nó
-   }while(novo != NULL);
-
-}
-
+TpCartaBaralho* Inserir(TpCartaBaralho *baralho,int naipe, int number);
+void Embaralha(TpCartaBaralho *baralho,int *naipe,int *number);
+void drop(TpCartaBaralho* baralho,TpCartaBaralho* aux);
 #endif
 /**/
