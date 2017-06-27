@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+void insertionSort(int a[],int N){
+int chave,i,j;
+  for(j=0;j<N;j++){
+    chave=a[j];
+    i= j-1;
+    while(i>=0 && a[i] > chave){
+      a[i+1]=a[i];
+      i=i-1;
+    }
+   a[i+1]=chave;
+   }
+}
+
+
+void insertionSort(int a[],int N);
+
+int main(void){
+int N;
+
+puts("Digite a entrada do US");
+scanf("%d",&N);
+int a[N];
+srand(time(NULL));
+
+for(int i=0;N>i;i++){
+  //printf("Inserindo valor na posição do vetor  {%d}\n",i );
+
+  a[i] = rand()%100;
+  //printf("Valor {%d}\n",a[i] );
+  //puts("--------------------------------------------------------------------");
+  //insertionSort(&a[i],N);
+
+}
+insertionSort(&a[0],N);
+
+for(int i=0;N>i;i++){
+
+  printf("Valor {%d}\n",a[i] );
+}
+
+
+
+
+  return 0;
+}
