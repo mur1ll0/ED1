@@ -15,7 +15,7 @@ int main (void){
 
   while(opcao > 0){
     puts("____________________________________________");
-    puts("{1} Isenrir contatos                       _");
+    puts("{1} Inserir contatos                       _");
     puts("{2} Excluir contatos                       _");
     puts("{3} Alterar contatos                       _");
     puts("{4} Ordenar contatos                       _");
@@ -48,8 +48,7 @@ int main (void){
       break;
 
       case 4:
-
-
+      quickSort(ptr_Contato, 0, contadorInserir-1);
 
 
       break;
